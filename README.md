@@ -1,4 +1,6 @@
 # WaterPy
+![WaterPy: poner marcas de agua con Python](https://raw.githubusercontent.com/parzibyte/WaterPy/master/assets/ImagenV1.png)
+
 Una aplicación de escritorio (multiplataforma) para poner marcas de agua usando Python, PIL y appJar (una envoltura de Tkinter)
 ## Motivación
 Personalmente necesito poner marcas de agua cuando subo algunas imágenes a mi web en [parzibyte.me/blog](https://parzibyte.me/blog). 
