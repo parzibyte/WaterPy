@@ -1,7 +1,8 @@
 from PIL import Image
 import constantes
 import time
-
+import utiles
+import os
 def obtener_x(anchura_marca_de_agua, anchura_imagen, posicion, separacion_horizontal):
     x = 0
     if posicion == constantes.OPCION_HORIZONTAL_IZQUIERDA:
@@ -30,6 +31,7 @@ def obtener_y(altura_marca_de_agua, altura_imagen, posicion, separacion_vertical
         
 
 def poner_marca_de_agua(imagenes, marca_de_agua, **opciones):   
+    
     # Leer los ajustes que el usuario puso
     porcentaje_opacidad = opciones.get("porcentaje_opacidad")
     separacion_vertical = opciones.get("separacion_vertical")
@@ -45,15 +47,30 @@ def poner_marca_de_agua(imagenes, marca_de_agua, **opciones):
             rgba = marca_de_agua.getpixel((x,y))
             nuevo_rgba = (rgba[0],rgba[1],rgba[2],int((porcentaje_opacidad * rgba[3]) / 100))
             marca_de_agua.putpixel((x,y), nuevo_rgba)
+    # Crear directorio
+    ruta_verdadera = utiles.crear_directorio_de_salida(os.path.dirname(imagenes[0]))
+    # Y las procesamos
+    #TODO: DRY
+    if len(imagenes) == 1:
+        ruta_imagen = imagenes[0]
+        imagen = Image.open(ruta_imagen)
+        anchura_imagen, altura_imagen = imagen.size
+        x = obtener_x(anchura_marca_de_agua, anchura_imagen, opcion_alineamiento_horizontal, separacion_horizontal)
+        y = obtener_y(altura_marca_de_agua, altura_imagen, opcion_alineamiento_vertical, separacion_vertical)
+        imagen.paste(marca_de_agua, (x, y), marca_de_agua)
+        #nombre_imagen_guardada = "Salida_{}.png".format(time.time())
+        imagen.save(os.path.join(ruta_verdadera, os.path.basename(ruta_imagen)))
+        #print("Guardada como " + nombre_imagen_guardada)
+    else:
+        for ruta_imagen in imagenes:
+            imagen = Image.open(ruta_imagen)
+            anchura_imagen, altura_imagen = imagen.size
+            x = obtener_x(anchura_marca_de_agua, anchura_imagen, opcion_alineamiento_horizontal, separacion_horizontal)
+            y = obtener_y(altura_marca_de_agua, altura_imagen, opcion_alineamiento_vertical, separacion_vertical)
+            imagen.paste(marca_de_agua, (x, y), marca_de_agua)
+            #nombre_imagen_guardada = "Salida_{}.png".format(time.time())
+            imagen.save(os.path.join(ruta_verdadera, os.path.basename(ruta_imagen)))
+            #print("Guardada como " + nombre_imagen_guardada)
     # Una vez que la marca de agua esté lista, la pegamos sobre las demás
-    ruta_imagen = imagenes[0]
-    imagen = Image.open(ruta_imagen)
-    anchura_imagen, altura_imagen = imagen.size
-    x = obtener_x(anchura_marca_de_agua, anchura_imagen, opcion_alineamiento_horizontal, separacion_horizontal)
-    y = obtener_y(altura_marca_de_agua, altura_imagen, opcion_alineamiento_vertical, separacion_vertical)
-    imagen.paste(marca_de_agua, (x, y), marca_de_agua)
-    nombre_imagen_guardada = "Salida_{}.png".format(time.time())
-    imagen.save(nombre_imagen_guardada)
-    print("Guardada como " + nombre_imagen_guardada)
+    
     #for imagen in raiz.imagenes:
-        #print("*procesa la imagen {}*".format(imagen))
