@@ -2,6 +2,29 @@
 ![WaterPy: poner marcas de agua con Python](https://raw.githubusercontent.com/parzibyte/WaterPy/master/assets/ImagenV1.png)
 
 Una aplicación de escritorio (multiplataforma) para poner marcas de agua usando Python, PIL y appJar (una envoltura de Tkinter)
+
+Más información en mi blog: https://parzibyte.me/blog/2019/01/18/presentando-waterpy-aplicacion-marca-de-agua/
+
+## Descargas
+En el apartado releases o aquí: https://github.com/parzibyte/WaterPy/releases/tag/0.1
+
+## Ejemplo de lo que hace esta aplicación de escritorio
+
+**Nota antes de todo:** las imágenes las tomé de internet y las eliminé después de usarlas para demostrar esto, si tienen derechos de autor o algo así, pueden pedir que las elimine, no quiero problemas. 
+
+Voy a demostrar cómo se posicionan las imágenes. Para ello tengo la siguiente carpeta: ![Carpeta no marcada](https://parzibyte.me/blog/wp-content/uploads/2019/01/Carpeta-no-marcada.png)
+
+Esa es de una de mis series favoritas, Rick y Morty (pobre hombre pájaro, por cierto). 
+Y la marca de agua será de Aku Aku, el amigo o ayudante de Crash. Selecciono eso en el programa: 
+![Poner marca de agua, primer ejemplo](https://parzibyte.me/blog/wp-content/uploads/2019/01/Poner-marca-de-agua-primer-ejemplo.png)]Poner marca de agua, primer ejemplo
+
+La pondré arriba a la izquierda, y listo. Queda así:![Imagen de Rick, Squanchy y hombre pájaro con marca de agua de Aku Aku](https://parzibyte.me/blog/wp-content/uploads/2019/01/1.jpg)]Imagen de Rick, Squanchy y hombre pájaro con marca de agua de Aku Aku
+
+Eso fue con un 20 % de opacidad, entre menor opacidad, más transparente. Aquí está la misma pero con una opacidad de 90 %: ![Marca de agua con opacidad del 90 %](https://parzibyte.me/blog/wp-content/uploads/2019/01/1-1.jpg)Marca de agua con opacidad del 90 %
+
+Así se puede ir jugando con cada una. En la siguiente demostración, a cada imagen se le pone la marca de agua en una distinta posición (tiene el 50 de opacidad): ![Posibilidad de posicionamiento de marca de agua con WaterPy](https://parzibyte.me/blog/wp-content/uploads/2019/01/Posibilidad-de-posicionamiento-de-marca-de-agua-con-WaterPy.png)Posibilidad de posicionamiento de marca de agua con WaterPy
+
+Si nos fijamos bien, Aku Aku aparece en 9 posiciones distintas. También se podría jugar con la separación que tiene la imagen con respecto a su posición.
 ## Motivación
 Personalmente necesito poner marcas de agua cuando subo algunas imágenes a mi web en [parzibyte.me/blog](https://parzibyte.me/blog). 
 
