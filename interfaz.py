@@ -2,8 +2,15 @@ from appJar import gui
 import constantes
 import utiles
 import waterpy
+import os
+import sys
 raiz = {}
 
+# Esta función es para PyInstaller
+def resolver_ruta(ruta_relativa):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, ruta_relativa)
+    return os.path.join(os.path.abspath('.'), ruta_relativa)
 
 def seleccionar_marca_de_agua():
     if "marca_de_agua" in raiz:
@@ -79,7 +86,7 @@ def validar():
 def procesar_lista_de_imagenes(imagenes):
     raiz["imagenes"] = imagenes
 
-app = gui("WaterPy | Poner marca de agua con Python", "600x400")
+app = gui("WaterPy | Poner marca de agua con Python", "600x400", showIcon=False)
 """
     Otra ventana para créditos
 """
@@ -111,9 +118,9 @@ app.stopSubWindow()
 app.addLabel("l1", "1 - Selecciona una imagen o carpeta", 0,0)
 app.setLabelAlign("l1", "left")
 app.addNamedButton("Carpeta", "btnCarpeta", seleccionar_carpeta, 1, 0)
-app.setButtonImage("btnCarpeta", "./assets/carpeta.png", align="right")
+app.setButtonImage("btnCarpeta", resolver_ruta("./assets/carpeta.png"), align="right")
 app.addNamedButton("Imagen", "btnImagen", seleccionar_imagen,1,1)
-app.setButtonImage("btnImagen", "./assets/imagen.png", align="right")
+app.setButtonImage("btnImagen", resolver_ruta("./assets/imagen.png"), align="right")
 app.addMessage("msgInfoFuente", "", 2,0)
 app.setMessageFg("msgInfoFuente", "#304FFE")
 app.setMessageAlign("msgInfoFuente", "left")
@@ -122,7 +129,7 @@ app.addLabel("l2", "2 - Ahora selecciona la marca de agua", 3,0)
 app.setLabelAlign("l2", "left")
 app.addNamedButton("Seleccionar marca de agua...", "btnMarcaDeAgua", seleccionar_marca_de_agua,4,0)
 
-app.setButtonImage("btnMarcaDeAgua", "./assets/lapiz.png", align="right")
+app.setButtonImage("btnMarcaDeAgua", resolver_ruta("./assets/lapiz.png"), align="right")
 
 app.addMessage("msgInfoMarca", "", 5,0)
 app.setMessageAlign("msgInfoMarca", "left")
@@ -154,6 +161,6 @@ app.setLabelAlign("l7", "left")
 app.addEntry("e2", 13, 1)
 app.setEntry("e2", "0")
 app.addNamedButton("Comenzar", "btnComenzar", poner_marca_de_agua,14,0)
-app.setButtonImage("btnComenzar", "./assets/iniciar.png", align="right")
+app.setButtonImage("btnComenzar", resolver_ruta("./assets/iniciar.png"), align="right")
 app.addNamedButton("Acerca de", "btnCreditos", mostrar_creditos,14,1)
 app.go()
